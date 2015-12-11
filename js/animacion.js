@@ -8,13 +8,17 @@ window.onload = function(){
         logo = $("#logo"),
         planta = $("#planta"),
         copo = $(".copos"),
-        saludo = $("#saludo");
+        saludo = $("#saludo"),
+        arbolito = $("#arbolito"),
+        arriba = $("#arriba"),
+        medio = $("#medio"),
+        abajo = $("#abajo");
 
 
     // Animación de elementos sueltos (Ej.: Simular preloader)
     // TweenMax.to( target, duration, { vars } );
-    TweenMax.to(preloader, 2, { width:"100%" });
-    TweenMax.to(preloader, 1, { width:"0", opacity: 0, delay: 2, onComplete: apertura });
+    TweenMax.to(preloader, 1, { width:"100%" });
+    TweenMax.to(preloader, 0.5, { width:"0", opacity: 0, delay: 1, onComplete: apertura });
 
     function apertura(){
         TweenMax.to(logo, 2, { opacity: 1, top:"-=20", onComplete: comenzarAnimacionFiestas });
@@ -26,13 +30,13 @@ window.onload = function(){
         var tl = new TimelineMax();
 
         // Curvas de animación: http://greensock.com/ease-visualizer
-        tl.to($("body"), 1, { backgroundColor: "#4d6340" });
-        tl.to([planta], 1, { scale: 2, ease:Elastic.easeOut, onComplete: mostrarCopos });
-
         // TweenMax.fromTo( target, duration, { fromVars }, { toVars } );
-        tl.fromTo(saludo, 1, { scale: 0, ease:Elastic.easeOut }, { opacity: 1, scale: 1.2, bottom: "-=50" });
-
+        tl.to($("body"), 1, { backgroundColor: "#4d6340", ease: Bounce.easeOut });
+        tl.to(arbolito, 0.5, { opacity: 1 });
+        tl.to(arriba, 1, { scale: 1.2, transformOrigin: "center center", ease: Bounce.easeOut, top: "-=10", fill: "#FFF", yoyo: true, repeat: -1, onStart: mostrarCopos });
+        //tl.fromTo(saludo, 1, { scale: 0, ease:Elastic.easeOut }, { opacity: 1, scale: 1.2, bottom: "-=50" });
         //tl.reverse();
+        
         return timeline;
     }
 

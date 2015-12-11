@@ -50,3 +50,17 @@ body{
     margin-left: -50px;
     opacity: 0;
 }
+
+#arbolito{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -45px;
+    opacity: 0;
+}
+
+#medio,
+#arriba,
+#abajo{
+    position: relative;
+}
