@@ -7,7 +7,8 @@ window.onload = function(){
     var preloader = $("#preloader"),
         logo = $("#logo"),
         planta = $("#planta"),
-        copo = $(".copos");
+        copo = $(".copos"),
+        saludo = $("#saludo");
 
 
     // Animación de elementos sueltos (Ej.: Simular preloader)
@@ -15,27 +16,31 @@ window.onload = function(){
     TweenMax.to(preloader, 2, { width:"100%" });
     TweenMax.to(preloader, 1, { width:"0", opacity: 0, delay: 2, onComplete: apertura });
 
-
-    // Linea de tiempo principal
     function apertura(){
-        var tl = new TimelineMax();
-
-        tl.to($("body"), 0.5, { backgroundColor: "#fbf4e9" });
-        tl.to(logo, 2, { opacity: 1, top:"-=20" });
-        tl.to(planta, 2, { opacity: 1, top:"-=20", onComplete: sacudirPlanta });
-        //tl.reverse();
-
-        return timeline;
+        TweenMax.to(logo, 2, { opacity: 1, top:"-=20", onComplete: comenzarAnimacionFiestas });
     }
 
-    function sacudirPlanta(){
+    // Linea de tiempo principal
+    function comenzarAnimacionFiestas(){
+
+        var tl = new TimelineMax();
+
         // Curvas de animación: http://greensock.com/ease-visualizer
-        TweenMax.to([planta], 1, { scale: 2, ease:Elastic.easeOut, onComplete: mostrarCopos });
+        tl.to($("body"), 1, { backgroundColor: "#4d6340" });
+        tl.to([planta], 1, { scale: 2, ease:Elastic.easeOut, onComplete: mostrarCopos });
+
+        // TweenMax.fromTo( target, duration, { fromVars }, { toVars } );
+        tl.fromTo(saludo, 1, { scale: 0, ease:Elastic.easeOut }, { opacity: 1, scale: 1.2, bottom: "-=50" });
+
+        //tl.reverse();
+        return timeline;
     }
 
     function mostrarCopos(){
         // TweenMax.staggerFrom( target, duration, { vars }, timeBetween );
-        TweenMax.staggerTo(copo, 2, { autoAlpha: 1, opacity: 0, rotation:360, transformOrigin:"50% 50%", scale: 0.3, bottom: "-=30", yoyo: true, repeat: -1 }, 0.2);
+        TweenMax.staggerTo(copo, 2, { autoAlpha: 1, opacity: 1, rotation:360, transformOrigin:"50% 50%", scale: 0.3, bottom: "-200px", yoyo: true, repeat: -1 }, 0.2);
     }
 
 }
+
+// Un ejemplo copado: http://codepen.io/magalhaespaulo/pen/OyQeQv
