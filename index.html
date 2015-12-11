@@ -1,0 +1,55 @@
+<!doctype>
+<html>
+<head>
+    <title>Hello animation</title>
+    <script src="js/TimelineMax.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+</head>
+<body>
+    <div id="preloader"></div>
+    <div id="logo"><img src="img/ui/logo.svg" alt="COLORMONO"></div>
+
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        background-color: #333;
+    }
+    #preloader{
+        position: relative;
+        height: 10px;
+        width: 0px;
+        background-color: #FFF;
+    }
+    #logo{
+        position: absolute;
+        opacity: 0;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        margin-left: -150px;
+    }
+</style>
+<script>
+window.onload = function(){
+
+    var tl = new TimelineMax({ paused: true });
+
+    var preloader = document.getElementById("preloader"),
+        logo = document.getElementById("logo");
+
+    //TweenMax.to( [target], [duration], [values] )
+    TweenMax.to(preloader, 2, { width:"100%" });
+    TweenMax.to(preloader, 1, { width:"0", opacity: 0, delay: 2, onComplete:startAnimation, onCompleteParams:["animation complete!"] });
+
+    function startAnimation(){
+        tl.play();
+        tl.to(logo, 2, { opacity: 1, top:"-=20" });
+    }
+
+}
+
+
+</script>
+</body>
+</html>
